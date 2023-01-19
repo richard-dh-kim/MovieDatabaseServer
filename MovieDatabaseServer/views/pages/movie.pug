@@ -1,0 +1,107 @@
+html 
+    head 
+        title #{movie.Title} 
+
+body 
+    //include header
+    include ../partials/header 
+    //page for individual movie
+    div#main 
+        script(src='/js/editProfile.js')
+        //list movie properties
+        h1 #{movie.Title} (#{movie.Year})
+
+        //button to add current movie to watched list
+        button(type='button', onclick="addToWatchedList()") Add to Watched List
+        br
+
+        //calculate average rating
+        -averageRating = 0;
+        if movie.Review
+            if movie.Review.length > 0
+                -var averageRating = 0;
+                -var counter = 0;
+                each indiReview in movie.Review
+                    -averageRating += parseInt(indiReview.rating)
+                    -counter++
+                -averageRating = averageRating/counter
+
+        p Average Rating: #{averageRating} / 10
+
+        p Released in #{movie.Released}
+
+        p Rated: #{movie.Rated}
+
+        p Runtime: #{movie.Runtime} 
+
+        //array properties
+        p 
+        |Genres: 
+        each genre in movie.Genre 
+            a(href="/movies?page=1&Title=&Actors=&Genre=" + genre) #{genre}
+            |
+            |
+        br
+        p Directors:
+        each director in movie.DirectorID
+            a(href="/people/"+director._id) #{director.name}
+            br
+        br
+
+        p Writers: 
+        each writer in movie.WriterID
+            a(href="/people/"+writer._id) #{writer.name}
+            br
+        br
+
+        p Actors: 
+        each actor in movie.ActorsID
+            a(href="/people/"+actor._id) #{actor.name}
+            br
+        br
+
+        p Plot: #{movie.Plot} 
+
+        p Awards: #{movie.Awards} 
+
+        p Similar Movies (5 movies with similar genre):
+        each similarMovie in similarMovies
+            a(href="/movies/"+similarMovie._id) #{similarMovie.Title}
+            br
+
+        //reviews
+        if movie.Review
+            if movie.Review.length > 0
+                p Reviews: 
+                each singleReview in movie.Review
+                    |#{singleReview.rating}/10
+                    |
+                    |
+                    |#{singleReview.summary}
+                    br
+                    a(href="/movies/" + singleReview.movie._id + "/reviews/" + singleReview._id) View Details
+                    br
+                    br
+        
+        //adding review
+        p Write a Reivew (you must write either a basic review by just inputting the rating, or write a full review by inputting all the criterias):
+        form(action='/movies/reviews', method='post')
+            //hidden input for movie's _id
+            input#movieId(type="hidden" name="movieId" value=movie._id)
+            label(for='rating') Rating (as a number, out of 10):
+            br
+            input#rating(type='number', name="rating", min='0', max='10', required)
+            br
+            label(for='summary') Summary:
+            br
+            textarea#summary(rows='1', name="summary", cols='50', type='text')
+            br
+            label(for='full') Full Review:
+            br
+            textarea#full(rows='7', name="full", cols='50', type='text')
+            br
+            br
+            button(type='submit') Submit
+
+    //include footer
+    include ../partials/footer

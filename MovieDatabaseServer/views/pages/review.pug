@@ -1,0 +1,27 @@
+html 
+    head 
+        title Review 
+
+body 
+    //include header
+    include ../partials/header 
+    //page for individual review
+    div#main 
+        //list movie properties
+        h1 Review of #{review.movie.Title}, by user: #{review.user.username}
+
+        p Rating: #{review.rating} / 10
+
+        if review.summary
+            if review.summary.length > 0
+                p Summary: #{review.summary}
+
+                p Full: #{review.full}
+        br
+        br
+        a(href="/movies/" + review.movie._id) Go back to movie: #{review.movie.Title}
+        br
+        a(href="/users/" + review.user._id) View #{review.user.username}'s page
+        br
+    //include footer
+    include ../partials/footer

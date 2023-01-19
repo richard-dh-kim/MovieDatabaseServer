@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Add a New Movie</title>
+    </head>
+    <body>
+        <a href="http://localhost:3000/profile">Profile</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="http://localhost:3000/movies">Search Movies</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="http://localhost:3000/app/addPerson.html">Add New Person</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="http://localhost:3000/logout">Log Out</a>
+        </br>
+        </br>
+        <div id="main">
+            Add a Movie (All fields are required):<br /><br />
+            <label for="Title">Title:</label><br />
+            <input id="Title" type="text" /><br />
+            <label for="ReleaseYear">Release Year (as a number):</label><br />
+            <input id="ReleaseYear" type="number" min="0" /><br />
+            <label for="Runtime">Runtime (as a number):</label><br />
+            <input id="Runtime" type="number" min="0" /><br />
+            <label for="Plot">Plot:</label><br />
+            <input id="Plot" type="text" /><br />
+            <label for="Genre">Genre (capitalize first letter in each genre, separate by commas without any space in between):</label><br />
+            <input id="Genre" type="text" /><br />
+            <p>Persons, input at least one of each. Do not repeat names, it will break me :(</p>
+            <p>Capitalize first letter of both first and last name, put a space in between</p><br />
+            <label for="Director">Director</label><br />
+            <input id="Director" name="Director" type="text" /><br />
+            <label for="Writer">Writer</label><br />
+            <input id="Writer" name="Writer" type="text" /><br />
+            <label for="Actors">Actor</label><br />
+            <input id="Actors" name="Actors" type="text" /><br><br>
+            <button id="addMovie" type="button" onclick="addMovie()">Add Movie</button><br />
+            <br><br>
+            <input type="text" name="dynamicSearchBar" id="dynamicSearchBar" cols='50' placeholder="Dynamic Search not Implemented :("/>
+            <br>
+            <ul id="personList"></ul>
+        </div>
+        </br>
+        <p>&copy; Copyright 2021 COMP2406</p>
+        <script src="js/addMovie.js"></script>
+    </body>
+</html>

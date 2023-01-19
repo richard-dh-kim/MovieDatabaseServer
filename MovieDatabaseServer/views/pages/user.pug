@@ -1,0 +1,41 @@
+html 
+    head 
+        title #{user.username} 
+
+body 
+    //include header
+    include ../partials/header 
+    //page for individual user
+    div#main 
+        script(src='/js/editProfile.js')
+        h1 User: #{user.username}
+        br 
+        //button to follow current user
+        button(type='button', onclick="followUser()") Folow
+        br
+
+        if user.peopleFollowing
+            if user.peopleFollowing.length > 0
+                p People #{user.username} Follows: 
+                each person in user.peopleFollowing
+                    a(href="/people/"+ person._id) #{person.name}
+                    br
+                br
+
+        if user.moviesWatched
+            if user.moviesWatched.length > 0
+                p #{user.username}'s Watched List:
+                each movie in user.moviesWatched 
+                    a(href="/movies/"+ movie._id) #{movie.Title}
+                    br
+                br
+
+        if user.reviews
+            if user.reviews.length > 0
+                p Reviews: 
+                each review in user.reviews
+                    a(href="/movies/" + review.movie._id + "/reviews/" + review._id) #{review.movie.Title}
+                    br
+
+    //include footer
+    include ../partials/footer

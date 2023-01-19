@@ -1,0 +1,45 @@
+html 
+    head 
+        title #{person.name}
+
+body 
+    //include header
+    include ../partials/header 
+    //page for individual person
+    div#main 
+        script(src='/js/editProfile.js')
+        h1 Person: #{person.name}
+        br 
+        //button to follow current person
+        button(type='button', onclick="followPerson()") Folow
+        br
+
+        if person.Director.length > 0
+            p Directed: 
+            each movie in person.Director 
+                a(href="/movies/" +movie._id) #{movie.Title}
+                br
+
+        if person.Writer.length > 0
+            p Wrote: 
+            each movie in person.Writer 
+                a(href="/movies/" +movie._id) #{movie.Title}
+                br
+        
+        if person.Actors.length > 0
+            p Acted: 
+            each movie in person.Actors 
+                a(href="/movies/" +movie._id) #{movie.Title}
+                br
+
+        if collaborators
+            if collaborators.length > 0
+                p Frequently Collborates With: 
+                each collab in collaborators
+                    if collab
+                        a(href="/people/" + collab._id) #{collab.name}
+                        br
+                br
+
+    //include footer
+    include ../partials/footer

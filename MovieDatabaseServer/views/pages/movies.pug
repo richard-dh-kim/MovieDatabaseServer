@@ -1,0 +1,50 @@
+html 
+    head 
+        title Movies Search
+
+body 
+    //include header
+    include ../partials/header 
+
+    //inputs
+    div#inputs  
+        script(src='/js/searchMovies.js')
+        h1 Movies Search
+        
+        p Enter data into the filter form below and hit refresh to find matching movies.
+        
+        p Title (will show movies with title that contains text entered, not case sensitive):
+            br
+            input#Title(type="textbox")
+        p Actors (separate by commas with no space in between, names need to be exact, case sensitive) :
+            br
+            input#Actors(type="textbox")
+        p Genre (separate by commas with no space in between, names need to be exact, case sensitive) :
+            br
+            input#Genre(type="textbox")
+        
+        button#refresh(type="button", onclick="searchMovies()") Refresh Results
+        br
+        br
+
+        //movies
+        each movie in movies
+            a(href="/movies/" +movie._id) #{movie.Title} 
+            br
+        br
+
+        //if we are at page bigger than 1, add previous button
+        if current > 1
+            -let url = "/movies?page=" + (current-1)
+            - if (qstring.length > 0) {url += "&" + qstring;}
+            a(href=url) Previous 
+            |
+        //add next button if current is below max (max number of pages)
+        if current < max
+            -url = "/movies?page=" + (current+1)
+            -if (qstring.length>0){url += "&" + qstring;}
+            a(href=url) Next
+        
+    br
+    //include footer
+    include ../partials/footer

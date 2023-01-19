@@ -1,0 +1,20 @@
+{
+  "name": "2406_finalproject",
+  "version": "1.0.0",
+  "description": "Final Project for the course COMP 2406, written by Richard Kim (101138475)",
+  "main": "MovieModel.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "initialize": "node databaseinitializer.js",
+    "server": "node movieDatabaseServer.js",
+    "start": "npm run initialize && npm run server"
+  },
+  "author": "Richard Kim",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.12.2",
+    "pug": "^3.0.2",
+    "express-session": "^1.17.1"
+  }
+}

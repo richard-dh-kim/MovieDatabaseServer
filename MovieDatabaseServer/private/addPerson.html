@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Add a new Person</title>
+    </head>
+    <body>
+        <a href="http://localhost:3000/profile">Profile</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="http://localhost:3000/movies">Search Movies</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="http://localhost:3000/app/addMovie.html">Add New Movie</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="http://localhost:3000/logout">Log Out</a>
+        </br>
+        </br>
+        <div id="main">
+            <label for="name">Name (capitalize first letter of both first and last name, put a space in between):</label><br />
+            <input id="name" type="text" required/><br /><br />
+            Choose the type of person:<br />
+            <input id="Director" name="personType" type="radio" value="Director" required/>
+            <label for="Director">Director</label><br />
+            <input id="Actor" name="personType" type="radio" value="Actor" />
+            <label for="Actor">Actor</label><br />
+            <input id="Writer" name="personType" type="radio" value="Writer" />
+            <label for="Writer">Writer</label><br />
+            <button id="addPerson" type="button" onclick="addPerson()">Add Person</button>
+        </div>
+        </br>
+        <p>&copy; Copyright 2021 COMP2406</p>
+        <script src="js/addPerson.js"></script>
+    </body>
+</html>

@@ -1,0 +1,85 @@
+html 
+    head 
+        title #{user.username} 
+
+body 
+    //include header
+    include ../partials/header 
+
+    //page for individual user
+    div#main 
+        script(src='/js/editProfile.js')
+        h1 Hello #{user.username}!
+        br 
+        if user.ifContributor == true
+            p Account Type: Contributor
+            p Change to regular?
+        else 
+            p Account Type: Regular
+            p Change to contributor?
+        br
+        button(type="button", onclick="changeUserType()") Change
+        br
+        br
+
+        if user.peopleFollowing
+            if user.peopleFollowing.length > 0
+                p People you Follow: 
+                each person in user.peopleFollowing
+                    button(type='button', onclick="unfollowPerson(this)", value=person._id) Unfollow
+                    |
+                    |
+                    a(href="/people/"+ person._id) #{person.name}
+                    br
+                br
+
+        if user.usersFollowing
+            if user.usersFollowing.length > 0
+                p Users you Follow:
+                each userFollowing in user.usersFollowing
+                    button(type='button', onclick="unfollowUser(this)", value=userFollowing._id) Unfollow
+                    |
+                    |
+                    a(href="/users/" + userFollowing._id) #{userFollowing.username}
+                    br
+                br
+
+        if user.moviesWatched
+            if user.moviesWatched.length > 0
+                p Watched List:
+                each movie in user.moviesWatched 
+                    button(type='button', onclick="deleteFromWatchedList(this)", value=movie._id) Delete
+                    |
+                    |
+                    a(href="/movies/" + movie._id) #{movie.Title}
+                    br
+                br
+        
+        if user.reviews
+            if user.reviews.length > 0
+                p Movies you reviewed:
+                each singleReview in user.reviews
+                    a(href="/movies/" + singleReview.movie._id + "/reviews/" + singleReview._id) #{singleReview.movie.Title} 
+                    br 
+                br 
+
+        p Movies Recommendations: 
+        each recommended in recommendedMovies
+            a(href="/movies/" + recommended._id) #{recommended.Title}
+            br
+        br
+
+        if notifications
+            if notifications.length > 0
+                p Notifications: 
+                each notif in notifications 
+                    if notif.type
+                        a(href="/movies/" + notif.movie._id) #{notif.fromPerson} has a new movie! #{notif.movie.Title}
+                        br
+                    else 
+                        a(href="/movies/" + notif.movie._id) #{notif.fromUser} wrote a new review for #{notif.movie.Title}!
+                        br
+                br
+
+    //include footer
+    include ../partials/footer
